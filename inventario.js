@@ -47,8 +47,11 @@ formulario.addEventListener("submit", function (event) {
   datos.push(estudiante);
   //llamo a la funcion para mostrar los datos en la tabla
   agregarFila(estudiante);
+  //envío los datos a la base de datos
+  enviarDatosABaseDeDatos(estudiante);
   //limpio los inputs
   limpiarInputs();
+  
   
 });
 
@@ -105,3 +108,37 @@ function eliminarFila(fila, estudiante) {
     datos.splice(index, 1);
   }
 }
+
+function enviarDatosABaseDeDatos(estudiante) {
+  fetch("insertar_estudiante.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams(estudiante),
+  })
+    .then((response) => response.text())
+    .then((data) => {
+      console.log(data); // Muestra el mensaje del servidor (éxito o error)
+    })
+    .catch((error) => {
+      console.error("Error al enviar los datos:", error);
+    });
+}
+
+// Función para cargar los datos desde la base de datos
+function cargarDatosDesdeBaseDeDatos() {
+  fetch("obtener_estudiantes.php")
+    .then((response) => response.json())
+    .then((estudiantes) => {
+      estudiantes.forEach((estudiante) => {
+        agregarFila(estudiante); // Reutilizamos la función existente para agregar filas
+      });
+    })
+    .catch((error) => {
+      console.error("Error al cargar los datos:", error);
+    });
+}
+
+// Llamar a la función al cargar la página
+document.addEventListener("DOMContentLoaded", cargarDatosDesdeBaseDeDatos);
