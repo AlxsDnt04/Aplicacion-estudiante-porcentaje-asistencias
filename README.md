@@ -1,6 +1,3 @@
-Aquí tienes un ejemplo de archivo `README.md` para tu repositorio, que puedes adaptar según sea necesario:
-
-```markdown
 # Aplicación Estudiante - Porcentaje de Asistencias
 
 Esta es una aplicación web diseñada para calcular y gestionar el porcentaje de asistencias de estudiantes. Es ideal para profesores, instituciones educativas o cualquier persona que necesite llevar un registro de asistencia de estudiantes de manera eficiente.
